@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Hollowed-out-text</title>
+    <link rel="stylesheet" href="../../common/index.css"/>
+    <link rel="stylesheet" href="hollowed.css"/>
+    <style type="text/css">
+      .bg-text{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgb(240,240,240);
+        z-index: 3;
+        opacity: 0.8;
+      }
+      .text {
+        font-size: 200;
+        font-weight: 900;
+        color:transparent;
+        text-align: center;
+        z-index: 4;
+        margin:0;
+        padding:0;
+      }
+      #canvas{
+        position: fixed;
+        top:0;
+        left:0;
+        z-index: 2;
+      }
+      #videoElementID{
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="bg-text"></div>
+      <div class="text">KONG66</div>
+      <div class="video-bg">
+        <video id="videoElementID" autoplay muted loop preload>
+          <source src="bgmovie.mp4" type="video/mp4"></source>
+        </video>
+        <canvas id="canvas"/>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var video = document.querySelector('#videoElementID');  // 找到需要截图的video标签
+      video.onplay = function(e) {
+        var timer = setInterval(getVideo,1/30)
+        
+        window.addEventListener('click',()=> {
+          clearInterval(timer)
+        })
+      }
+      function getVideo() {
+        var video = document.querySelector('#videoElementID');  // 找到需要截图的video标签
+        var canvas = document.querySelector('#canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);  // 图片大小和视频分辨率一致
+        var strDataURL = canvas.toDataURL();   // canvas中video中取一帧图片并转成dataURL
+        
+        var text = document.querySelector('.text');
+        
+        text.style='width:'+canvas.width+'px;height:'+canvas.height+'px;background:url('+strDataURL+');-webkit-background-clip: text;';
+      }
+      
+      //setTimeout(getVideo,3000)
+      //getVideo();
+    </script>
+  </body>
+</html>

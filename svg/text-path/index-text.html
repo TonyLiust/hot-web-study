@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>SVG-PATH-ANI</title>
+    <link rel="stylesheet" href="../../common/index.css"/>
+    <style type="text/css">
+      html{
+        background: #071a52;
+      }
+      .svg {
+        text-align: center;
+        font-size: 100;
+      }
+      .svg-text {
+        stroke-linecap:round;
+        animation-duration: 5s;
+        animation-timing-function: linear;
+        animation-iteration-count: 1;
+        animation-fill-mode: both;
+        animation-direction: alternate;
+      }
+      .svg-text-anima {
+        animation-name: strokeText;
+      }
+      .svg-text-anima1 {
+        animation-name: strokeText1;
+      }
+      .svg-text-anima2 {
+        animation-name: strokeText2;
+      }
+      @keyframes strokeText {
+        0%{
+          stroke-dashoffset:1000;
+        }
+        to{
+          stroke-dashoffset:0;
+        }
+      }
+      @keyframes strokeText1 {
+        20%{
+          stroke-dashoffset:1000;
+        }
+        to{
+          stroke-dashoffset:0;
+        }
+      }
+      @keyframes strokeText2 {
+        40%{
+          stroke-dashoffset:1000;
+        }
+        to{
+          stroke-dashoffset:0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" class="page">
+      <svg class="svg" width="1000" height="300">
+        <text ref="svgText" x="0" y="100" :class="['svg-text',{'svg-text-anima':hasAnimation}]">SVG IS AWSOME</text>
+      </svg>
+      <div class="operator">
+        <div class="input">
+          <label>stroke-width:{{strokeWidth}}</label>
+          <input type="range" @input="widthChange" value="1" min="1" max="10" class="range-input">
+          <label>dashoffset:{{dashoffset}}</label>
+          <input type="range" @input="dashoffsetChange" :value="dashoffset" min="1" max="1000" class="range-input">
+          <label>颜色:{{color}}</label>
+          <input type="color" @change="changeColor" :value="color">
+        </div>
+        <div class="btn">
+          <button @click="start">开始</button>
+          <button @click="stop">停止</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+  var vm = new Vue({
+    el: '#app',
+    data() {
+      return {
+        dasharray: 1000,
+        dashoffset: 1000,
+        strokeWidth:1,
+        color: '#fff001',
+        hasAnimation: false
+      }
+    },
+    mounted() {
+      this.$refs.svgText.style =  `stroke:${this.color};stroke-width:${this.strokeWidth};stroke-dasharray:${this.dasharray};stroke-dashoffset:${this.dashoffset};`
+    },
+    watch: {
+      dashoffset(a, b){
+        this.$refs.svgText.style =  `stroke:${this.color};stroke-width:${this.strokeWidth};stroke-dasharray:${this.dasharray};stroke-dashoffset:${a};`
+      },
+      color(a, b){
+        this.$refs.svgText.style =  `stroke:${a};stroke-width:${this.strokeWidth};stroke-dasharray:${this.dasharray};stroke-dashoffset:${this.dashoffset};`
+      },
+      strokeWidth(a, b) {
+        this.$refs.svgText.style =  `stroke:${this.color};stroke-width:${a};stroke-dasharray:${this.dasharray};stroke-dashoffset:${this.dashoffset};`
+      }
+    },
+    methods: {
+      widthChange (e) {
+        this.strokeWidth = e.target.value;
+      },
+      dashoffsetChange (e) {
+        this.dashoffset = e.target.value;
+      },
+      changeColor (e) {
+        this.color = e.target.value;
+      },
+      start () {
+        this.hasAnimation = true
+      },
+      stop () {
+        this.hasAnimation = false
+      }
+    }
+  });
+  </script>
+</html>

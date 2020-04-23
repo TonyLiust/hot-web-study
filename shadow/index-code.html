@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Long Shadow</title>
+    <link rel="stylesheet" href="../common/index.css"/>
+    <style type="text/css">
+    html{
+      font-size: 100px;
+      background-color: black;
+    }
+    body{
+      font-family: "Microsoft YaHei",sans-serif;
+      font-size: 0.12rem;
+    }
+    html,body,.page{
+      width: 100%;
+      height: 100%;
+    }
+    .page{
+      width: 100%;
+      height: 100%;
+    }
+    .page{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .text .long-shadow{
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      line-height: 1rem;
+      text-align: center;
+      font-size: .5rem;
+      color: white;
+      background: linear-gradient(135deg, #55acee 0%, #55acee 100%);
+      overflow: hidden;
+      border-radius: .1rem;
+    }
+    </style>
+	</head>
+	<body>
+		<div id="app" class="page">
+			<div class="text" ref="text">
+				<a class="long-shadow" text="KONG66"><span>K</span></a>
+				<a class="long-shadow" text="KONG66"><span>O</span></a>
+				<a class="long-shadow" text="KONG66"><span>N</span></a>
+				<a class="long-shadow" text="KONG66"><span>G</span></a>
+				<a class="long-shadow" text="KONG66"><span>6</span></a>
+				<a class="long-shadow" text="KONG66"><span>6</span></a>
+      </div>
+      <div class="operator">
+        <div class="input">
+          <label>shadow-length:{{shadowLength}}</label>
+          <input type="range" @input="shadowLengthChange" value="10" min="10" max="100" class="range-input">
+          <label>shadow-angle:{{shadowAngle}}</label>
+          <input type="range" @input="shadowAngleChange" value="1" min="1" max="180" class="range-input">
+          <label>颜色:{{shadowColor}}</label>
+          <input type="color" @change="changeColor" :value="shadowColor">
+        </div>
+        <div class="btn">
+          <button @click="start">开始</button>
+          <button @click="stop">停止</button>
+        </div>
+      </div>
+		</div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el: '#app',
+      data() {
+        return {
+          shadowLength: 50,
+          shadowAngle: 45,
+          shadowColor: '#2274b2',
+          timer: null
+        }
+      },
+      mounted() {
+        this.initShadow()
+      },
+      watch: {
+        shadowLength(a, b) {
+          this.initShadow()
+        },
+        shadowAngle(a, b) {
+          this.initShadow()
+        }
+      },
+      methods: {
+        initShadow() {
+          const texts = this.$refs.text.children;
+          for(let a of texts) {
+            if (a.children) {
+              const text = a.children[0];
+              // text.style.transition = 'text-shadow .5s';
+              text.style.textShadow = this.getTextShadow()
+            }
+          }
+        },
+        getTextShadow() {
+          const shadows = []
+          for(let i = 1 ; i <= this.shadowLength; i++) {
+            const x =  i * Math.sin(this.shadowAngle)
+            const y =  i * Math.cos(this.shadowAngle)
+            shadows.push(`${x}px ${y}px 0px ${this.shadowColor}`)
+          }
+          return shadows.join(',');
+        },
+        shadowLengthChange (e) {
+          this.shadowLength = e.target.value
+        },
+        shadowAngleChange (e) {
+          this.shadowAngle = e.target.value
+        },
+        changeColor (e) {
+          this.shadowColor = e.target.value
+        },
+        start () {
+          if(this.timer) return;
+          const _this = this;
+          this.timer = setInterval(() => {
+            _this.shadowAngle += 1/60
+            if(_this.shadowAngle === 360) {
+              _this.shadowAngle = 0
+            }
+          }, 1/24);
+        },
+        stop () {
+          clearInterval(this.timer)
+          this.timer = null
+        }
+      }
+    });
+  </script>
+</html>

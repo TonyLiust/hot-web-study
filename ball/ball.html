@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>bouncing ball</title>
+    <link rel="stylesheet" href="../common/index.css"/>
+    <link rel="stylesheet" href="ball.css"/>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <div ref="ball" :style="{ width : r + 'px', height : r + 'px', borderRadius : r/2 + 'px'}" class="ball"></div> -->
+      <div class="operator">
+        <div class="input">
+          <label>VX:{{vx}}</label>
+          <input type="range" @input="vxchange" value="1" min="1" max="50" class="range-input">
+          <label>VY:{{vy}}</label>
+          <input type="range" @input="vychange" value="1" min="1" max="50" class="range-input">
+          <label>直径:{{r}}</label>
+          <input type="range" @input="rchange" :value="r" @input="rchange" min="10" max="200" class="range-input">
+          <label>颜色:{{color}}</label>
+          <input type="color" @change="changeColor" :value="color">
+        </div>
+        <div class="btn">
+          <button @click="start">开始</button>
+          <button @click="stop">停止</button>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="ball.js"></script>
+  </body>
+</html>
