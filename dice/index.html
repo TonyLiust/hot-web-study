@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>dice-1</title>
+    <link rel="stylesheet" href="../common/index.css"/>
+    <link rel="stylesheet" href="dice.css"/>
+  </head>
+  <body>
+    <div id="app">
+      <div class="dice" @mousedown="mousedown" @mouseup="mouseup" @mousemove="mousemove">
+        <div class="vertical" ref="vertical">
+          <div class="horizontal" ref="horizontal">
+            <div ref="cube" class="cube">
+              <div class="face one front">
+                <span class="dot"></span>
+              </div>
+              <div class="face two back">
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <div class="face three up">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <div class="face four down">
+                <div class="dot-two">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+                <div class="dot-two">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <div class="face five left">
+                <div class="dot-two">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+                <div class="dot-two">
+                  <span class="dot"></span>
+                </div>
+                <div class="dot-two">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <div class="face six right">
+                <div class="dot-two">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+                <div class="dot-two">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <div class="axis-face x"></div>
+              <div class="axis-face y"></div>
+              <div class="axis-face z"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="operator">
+        <div class="input">
+          <label>X:{{x}}</label>
+          <input type="range" @input="xchange" :value="x" min="-360" max="360" class="range-input">
+          <label>Y:{{y}}</label>
+          <input type="range" @input="ychange" :value="y" min="-360" max="360" class="range-input">
+          <label>Z:{{z}}</label>
+          <input type="range" @input="zchange" :value="z" min="-360" max="360" class="range-input">
+        </div>
+        <div class="btn">
+          <button @click="start">开始</button>
+          <button @click="stop">停止</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="dice.js"></script>
+</html>

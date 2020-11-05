@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>delaunay triangle net</title>
+    <link rel="stylesheet" href="../common/index.css"/>
+    <link rel="stylesheet" href="net.css"/>
+  </head>
+  <body>
+    <div id="app">
+      <canvas ref="canvas"></canvas>
+      <div class="operator">
+        <div class="btn">
+          <button @click="add1">Add 1</button>
+          <button @click="add3">Add 3</button>
+          <button @click="add100">Add 100</button>
+          <button @click="clear">Clear</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="../common/common.js"></script>
+  <script src="../common/canvasCommon.js"></script>
+  <script src="think2.js"></script>
+</html>

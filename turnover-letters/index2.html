@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>ThreeD-Letter-2</title>
+    <link rel="stylesheet" href="../common/index.css"/>
+    <link rel="stylesheet" href="./styles.css"/>
+  </head>
+  <body>
+    <div id="app">
+      <img src="bg1.jpg"/>
+      <div class="threeD pieces" :style="{'--pieceWidth':`${Math.sqrt(700*700/pieces.length)-1}px`}">
+        <div class="piece" :style="{'background-position':`${i*232}px 232px`}" v-for="i in pieces"></div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="think2.js"></script>
+  </body>
+</html>

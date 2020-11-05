@@ -1,0 +1,85 @@
+html{
+  font-size: 100px;
+  font-family: "Microsoft YaHei",sans-serif;
+}
+p{
+  font-size: 1rem;
+}
+
+.threeD-letter{
+  color:#e3531b;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.threeD-letter:before,
+.threeD-letter:after{
+  content:attr(letter);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: left center;
+  transition: all .5s ease-in;
+}
+/* .threeD-letter:hover:before,
+.threeD-letter:hover:after{
+  transition: all .2s ease-out;
+} */
+.threeD-letter:before{
+  color:white;
+  z-index: 2;
+  transform: rotateY(20deg);
+  text-shadow:1px 1px #888,-1px -1px #eee;
+}
+.threeD-letter:before{
+  animation:var(--beforeRotateName) 1s linear var(--beforeRotate) forwards;
+}
+/* .threeD-letter:hover:before{ //beforeRotate infinite 1s linear forwards var(--beforeRotate)
+  transform: rotateY(45deg);
+} */
+
+.threeD-letter:after{
+  color:rgba(0,0,0,.2);
+  z-index: 1;
+  filter:blur(1px);
+  transform: scale(1.05,1) skewY(2deg);
+}
+.threeD-letter:after{
+  animation: var(--afterRotateName) 1s linear var(--afterRotate) forwards;
+}
+/* .threeD-letter:hover:after{
+  transform: rotateY(40deg) skewY(20deg) scale(1.1,1);
+} */
+@keyframes beforeRotate{
+  0%,100% {transform: rotateY(0);}
+  30%,50% {transform: rotateY(45deg);}
+}
+@keyframes afterRotate{
+  0%,100% {transform: rotateY(0);}
+  30%,50% {transform: rotateY(40deg) skewY(20deg) scale(1.1,1);}
+}
+
+img {
+  margin:20px;
+  width: 700px;
+  height: 700px;
+}
+.pieces{
+  width: 720px;
+  height: 720px;
+  display: block;
+  float: left;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+.piece{
+  width: var(--pieceWidth);
+  height: var(--pieceWidth);
+  background: url(bg1.jpg);
+  display: block;
+  float: left;
+  margin: 1px;
+}
+

@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>ThreeD-Letter</title>
+    <link rel="stylesheet" href="../common/index.css"/>
+    <link rel="stylesheet" href="./styles.css"/>
+  </head>
+  <body>
+    <div id="app">
+      <p class="threeD">
+        <span :style="{'--beforeRotateName':beforeRotateName,'--afterRotateName':afterRotateName,'--beforeRotate': `${index/2}s`,'--afterRotate':`${index/2}s`}" v-for="(letter,index) in letters1" class="threeD-letter" :letter="letter">{{letter}}</span>
+      </p>
+      <h2 class="threeD">
+        <span :style="{'--beforeRotateName':beforeRotateName,'--afterRotateName':afterRotateName,'--beforeRotate': `${index/2}s`,'--afterRotate':`${index/2}s`}" v-for="(letter,index) in letters2" class="threeD-letter" :letter="letter">{{letter}}</span>
+      </h2>
+      <div class="operator">
+        <div class="btn">
+          <button @click="moveit">{{btnText}}</button>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="think.js"></script>
+  </body>
+</html>
