@@ -1,8 +1,11 @@
 html
 {
-	background-color: black;
 	font-size:100px;
-	padding: 1em;
+}
+canvas{
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #000;
 }
 
 

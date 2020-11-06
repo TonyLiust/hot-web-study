@@ -234,8 +234,8 @@ var vm = new Vue({
   },
   mounted(){
     this.canvas = this.$refs.canvas;
-    this.canvas.width = this.w;
-    this.canvas.height = this.h;
+    this.canvas.width = this.w = 800;
+    this.canvas.height = this.h = 600;
     this.ctx = this.canvas.getContext("2d");
     this.canvas.onmousedown = this.onmouseDown;
     this.canvas.onmouseup = (e) => {
